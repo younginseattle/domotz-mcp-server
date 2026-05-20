@@ -1,5 +1,11 @@
 export const tool = {
   name: 'domotz_inventory',
+  annotations: {
+    readOnlyHint: false,
+    destructiveHint: true,
+    idempotentHint: false,
+    openWorldHint: true
+  },
   description: `Manage inventory fields, custom tags, device profiles, and device types. Use the "action" parameter to select an operation.
 
 ACTION REFERENCE:

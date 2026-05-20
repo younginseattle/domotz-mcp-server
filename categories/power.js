@@ -1,5 +1,11 @@
 export const tool = {
   name: 'domotz_power',
+  annotations: {
+    readOnlyHint: false,
+    destructiveHint: true,
+    idempotentHint: false,
+    openWorldHint: true
+  },
   description: `Manage device power actions and PDU power outlets. Use the "action" parameter to select an operation. Requires agent_id and device_id for all actions.
 
 ACTION REFERENCE:

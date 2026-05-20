@@ -1,5 +1,11 @@
 export const tool = {
   name: 'domotz_drivers',
+  annotations: {
+    readOnlyHint: false,
+    destructiveHint: false,
+    idempotentHint: false,
+    openWorldHint: true
+  },
   description: `Manage custom drivers and their associations with devices. Use the "action" parameter to select an operation.
 
 ACTION REFERENCE:
