@@ -3,6 +3,8 @@
  * Reduces round-trips and context usage for common workflows.
  */
 
+import { summarize, fetchAllPages } from '../lib/utils.js';
+
 export const tools = [
   {
     name: 'domotz_get_device_full_status',
@@ -40,21 +42,6 @@ export const tools = [
     }
   }
 ];
-
-const SUMMARY_LIMIT = parseInt(process.env.DOMOTZ_SUMMARY_LIMIT || '500', 10);
-
-function summarize(data) {
-  if (Array.isArray(data) && data.length > SUMMARY_LIMIT) {
-    return {
-      total: data.length,
-      showing: SUMMARY_LIMIT,
-      items: data.slice(0, SUMMARY_LIMIT),
-      truncated: true,
-      hint: `Showing first ${SUMMARY_LIMIT} of ${data.length} items.`
-    };
-  }
-  return data;
-}
 
 async function safeGet(api, url) {
   try {
@@ -121,14 +108,17 @@ async function searchDevices(args, api) {
 
   const deviceLists = await Promise.all(
     agentIds.map(async (id) => {
-      const devices = await safeGet(api, `/agent/${id}/device`);
-      if (!Array.isArray(devices)) return [];
-      return devices
-        .filter(d =>
-          (d.display_name && d.display_name.toLowerCase().includes(query)) ||
-          (d.ip_addresses && d.ip_addresses.some(ip => ip.includes(query)))
-        )
-        .map(d => ({ ...d, agent_id: id }));
+      try {
+        const devices = await fetchAllPages(api, `/agent/${id}/device`, {});
+        return devices
+          .filter(d =>
+            (d.display_name && d.display_name.toLowerCase().includes(query)) ||
+            (d.ip_addresses && d.ip_addresses.some(ip => ip.includes(query)))
+          )
+          .map(d => ({ ...d, agent_id: id }));
+      } catch {
+        return [];
+      }
     })
   );
 
