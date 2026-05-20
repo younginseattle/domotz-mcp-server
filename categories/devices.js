@@ -71,7 +71,17 @@ EXAMPLES:
       sorting_direction: { type: 'string', description: 'Sort direction (asc/desc)' },
       has_history: { type: 'boolean', description: 'Filter by has_history' },
       metric: { type: 'string', description: 'Filter by metric' },
-      body: { type: 'object', description: 'Request body (JSON object)' }
+      body: {
+        type: 'object',
+        description: 'Request body — fields depend on action. edit: object with one key matching the field name e.g. {"importance": "critical"} when field="importance". connect: {port: integer (required), protocol?: string e.g. "TCP"/"SSH"/"RDP", host?: string override}. monitoring_state: {state: "MONITORED"|"UNMONITORED"|"PAUSED" (required)}',
+        properties: {
+          port: { type: 'integer', description: 'Port number to connect to (connect action)' },
+          protocol: { type: 'string', description: 'Connection protocol e.g. "TCP", "SSH", "RDP" (connect action)' },
+          host: { type: 'string', description: 'Override host/IP address (connect action)' },
+          state: { type: 'string', enum: ['MONITORED', 'UNMONITORED', 'PAUSED'], description: 'New monitoring state (monitoring_state action)' }
+        },
+        additionalProperties: true
+      }
     },
     required: ['action']
   }

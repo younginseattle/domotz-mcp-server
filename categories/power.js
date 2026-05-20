@@ -44,7 +44,15 @@ EXAMPLES:
       attached_device_id: { type: 'integer', description: 'Device ID to attach/detach' },
       field: { type: 'string', description: 'Power action field name' },
       outlet_action: { type: 'string', description: 'Outlet action to trigger' },
-      body: { type: 'object', description: 'Request body (JSON object)' }
+      body: {
+        type: 'object',
+        description: 'Outlet settings to update (update_outlet action)',
+        properties: {
+          name: { type: 'string', description: 'Display name for the outlet' },
+          on_delay: { type: 'integer', description: 'Delay in seconds before powering on' },
+          off_delay: { type: 'integer', description: 'Delay in seconds before powering off' }
+        }
+      }
     },
     required: ['action']
   }

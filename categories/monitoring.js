@@ -64,7 +64,19 @@ EXAMPLES:
       medium_name: { type: 'string', description: 'Alert medium name (e.g. email, slack)' },
       from: { type: 'string', description: 'Start time for time series' },
       to: { type: 'string', description: 'End time for time series' },
-      body: { type: 'object', description: 'Request body (JSON object)' }
+      body: {
+        type: 'object',
+        description: 'Request body — fields depend on action. create_snmp: {oid: string (required), label?: string, unit?: string}. create_snmp_trigger: {function_id: integer (required), value: string (required)}. create_snmp_trigger_alert: no body needed (medium_name is a URL param). create_tcp: {port: integer (required), host?: string}',
+        properties: {
+          oid: { type: 'string', description: 'SNMP OID to monitor e.g. "1.3.6.1.2.1.1.3.0" (create_snmp)' },
+          label: { type: 'string', description: 'Display label for this sensor (create_snmp)' },
+          unit: { type: 'string', description: 'Unit of measurement e.g. "ms", "°C", "%" (create_snmp)' },
+          function_id: { type: 'integer', description: 'Trigger function ID from snmp_trigger_functions e.g. 2 = "is greater than" (create_snmp_trigger)' },
+          value: { type: 'string', description: 'Threshold value to compare against (create_snmp_trigger)' },
+          port: { type: 'integer', description: 'TCP port to monitor (create_tcp)' },
+          host: { type: 'string', description: 'Override host/IP address instead of device IP (create_tcp)' }
+        }
+      }
     },
     required: ['action']
   }

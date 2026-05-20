@@ -143,6 +143,7 @@ export async function handleComposite(toolName, args, api) {
   }
 
   return {
-    content: [{ type: 'text', text: JSON.stringify(result) }]
+    content: [{ type: 'text', text: JSON.stringify(result) }],
+    structuredContent: result
   };
 }
