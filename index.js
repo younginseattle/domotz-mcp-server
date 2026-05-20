@@ -78,8 +78,25 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
     updateContext(args);
     return result;
   } catch (error) {
+    const STATUS_HINTS = {
+      400: "Check required parameters and body format. Review the action's GOTCHAS in the tool description.",
+      401: "Verify DOMOTZ_API_KEY environment variable is set correctly and the key is still valid.",
+      403: "Your API key may lack permission for this operation. Check key permissions in the Domotz portal.",
+      404: "The specified resource does not exist. Verify agent_id and device_id are correct.",
+      409: "Conflict — the resource may already exist or be in an incompatible state.",
+      422: "Unprocessable request — the body format is likely incorrect for this action.",
+      429: "Rate limit reached. Wait 10–30 seconds before retrying.",
+      500: "Domotz API internal error. Try again in a moment.",
+      503: "Domotz API is temporarily unavailable.",
+    };
     const errorInfo = error.response
-      ? { error: true, status: error.response.status, message: error.response.data?.message || error.message, data: error.response.data }
+      ? {
+          error: true,
+          status: error.response.status,
+          message: error.response.data?.message || error.message,
+          hint: STATUS_HINTS[error.response.status] || "Unexpected error. See Domotz API docs at https://docs.domotz.com/api",
+          data: error.response.data
+        }
       : { error: true, message: error.message };
     return {
       content: [{ type: 'text', text: JSON.stringify(errorInfo) }],
