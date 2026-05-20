@@ -107,6 +107,16 @@ domotz-mcp-server/
 | `domotz_inventory` | 19 | Custom fields, tags, device profiles, device types |
 | `domotz_account` | 5 | User info, API usage stats, areas, team management |
 
+**Composite tools** (combine multiple API calls into a single operation):
+
+| Tool | What it does |
+|---|---|
+| `domotz_get_device_full_status` | Combines 5 API calls — device info, status history, SNMP sensors, TCP sensors, and alert bindings |
+| `domotz_get_agent_overview` | Combines agent details, full device list, and uptime into one response |
+| `domotz_search_devices` | Searches devices by name or IP address across one or all collectors |
+
+All 13 tools include MCP annotations (`readOnlyHint`, `destructiveHint`) so clients can assess the risk of a call before executing it.
+
 ---
 
 ## Prerequisites

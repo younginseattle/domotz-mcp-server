@@ -39,7 +39,23 @@ EXAMPLES:
       agent_id: { type: 'integer', description: 'Agent/Collector ID' },
       device_id: { type: 'integer', description: 'Device ID' },
       configuration_timestamp: { type: 'string', description: 'Configuration timestamp (for get_config)' },
-      body: { type: 'object', description: 'Request body (JSON object)' }
+      body: {
+        type: 'object',
+        description: 'Request body — fields depend on action. create_config: {content: string (required)}. set_credentials: {username: string, password: string, protocol?: string e.g. "SSH"/"TELNET"/"HTTP"}. set_snmp_auth: {auth_protocol: string e.g. "MD5"/"SHA", auth_password: string, privacy_protocol?: string e.g. "DES"/"AES", privacy_password?: string, security_level?: string e.g. "authPriv"/"authNoPriv"/"noAuthNoPriv"}. set_snmp_community: {community: string (required)}',
+        properties: {
+          content: { type: 'string', description: 'Configuration content/snapshot to store (create_config)' },
+          username: { type: 'string', description: 'Device username (set_credentials)' },
+          password: { type: 'string', description: 'Device password (set_credentials)' },
+          protocol: { type: 'string', description: 'Access protocol e.g. "SSH", "TELNET", "HTTP" (set_credentials)' },
+          auth_protocol: { type: 'string', description: 'SNMP v3 auth protocol e.g. "MD5", "SHA" (set_snmp_auth)' },
+          auth_password: { type: 'string', description: 'SNMP v3 auth password (set_snmp_auth)' },
+          privacy_protocol: { type: 'string', description: 'SNMP v3 privacy protocol e.g. "DES", "AES" (set_snmp_auth)' },
+          privacy_password: { type: 'string', description: 'SNMP v3 privacy password (set_snmp_auth)' },
+          security_level: { type: 'string', description: 'SNMP v3 security level e.g. "authPriv", "authNoPriv", "noAuthNoPriv" (set_snmp_auth)' },
+          community: { type: 'string', description: 'SNMP community string (set_snmp_community)' }
+        },
+        additionalProperties: true
+      }
     },
     required: ['action']
   }

@@ -1,7 +1,7 @@
 ---
 name: domotz-api
 description: "This skill should be used when working with the Domotz MCP server tools, querying network monitoring data, managing collectors/agents, devices, SNMP/TCP sensors, alerts, network policies, or any Domotz API operation."
-version: 2.0.0
+version: 2.1.0
 ---
 
 # Domotz MCP Server - API Skill
@@ -33,6 +33,8 @@ This MCP server consolidates **133 Domotz API actions** into **10 category tools
 | `domotz_drivers` | 8 | Custom drivers: associations, execute actions |
 | `domotz_inventory` | 19 | Custom fields, tags, device profiles, device types |
 | `domotz_account` | 5 | User info, API usage, areas, teams |
+
+**3 composite tools** are also available — `domotz_get_device_full_status`, `domotz_get_agent_overview`, and `domotz_search_devices` — each combining multiple API calls into one. All 3 carry `readOnlyHint: true` and are safe to call without side effects.
 
 ## Common Parameters
 

@@ -44,7 +44,19 @@ EXAMPLES:
       },
       agent_id: { type: 'integer', description: 'Agent/Collector ID' },
       device_id: { type: 'integer', description: 'Device ID (for excluded devices)' },
-      body: { type: 'object', description: 'Request body (JSON object)' }
+      body: {
+        type: 'object',
+        description: 'Request body — fields depend on action. set_external_scan_policy: {enabled: boolean (required), interval?: integer (minutes)}. set_interfaces_policy: {monitored: boolean (required)}. set_ip_scan_policy: {enabled: boolean (required), range?: string e.g. "192.168.1.0/24"}. create_routed_network: {network: string (required) e.g. "10.0.0.0/8", display_name?: string}',
+        properties: {
+          enabled: { type: 'boolean', description: 'Enable or disable the scan policy (set_external_scan_policy, set_ip_scan_policy)' },
+          interval: { type: 'integer', description: 'Scan interval in minutes (set_external_scan_policy)' },
+          monitored: { type: 'boolean', description: 'Whether to monitor this interface (set_interfaces_policy)' },
+          range: { type: 'string', description: 'IP range to scan in CIDR notation e.g. "192.168.1.0/24" (set_ip_scan_policy)' },
+          network: { type: 'string', description: 'Network address in CIDR notation e.g. "10.0.0.0/8" (create_routed_network)' },
+          display_name: { type: 'string', description: 'Display name for the routed network (create_routed_network)' }
+        },
+        additionalProperties: true
+      }
     },
     required: ['action']
   }
