@@ -91,7 +91,17 @@ EXAMPLES:
       metric: { type: 'string', description: 'Filter by metric' },
       name: { type: 'string', description: 'Filter applications by name' },
       device_ids: { type: 'string', description: 'Filter applications by device IDs' },
-      body: { type: 'object', description: 'Request body (JSON object)' }
+      body: {
+        type: 'object',
+        description: 'Request body — fields depend on action. create_vpn: {device_id?: integer}. external_host: {host: string (required), display_name?: string, port?: integer}. dhcp_discovery: {enabled: boolean (required)}',
+        properties: {
+          device_id: { type: 'integer', description: 'Device to create VPN session for (create_vpn)' },
+          host: { type: 'string', description: 'External host IP or hostname (external_host)' },
+          display_name: { type: 'string', description: 'Display name for the external host (external_host)' },
+          port: { type: 'integer', description: 'Port to check connectivity for external host (external_host)' },
+          enabled: { type: 'boolean', description: 'Enable or disable DHCP discovery (dhcp_discovery)' }
+        }
+      }
     },
     required: ['action']
   }

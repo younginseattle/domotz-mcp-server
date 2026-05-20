@@ -43,7 +43,13 @@ EXAMPLES:
       association_id: { type: 'integer', description: 'Association ID' },
       action_id: { type: 'integer', description: 'Driver Action ID' },
       include_unrecoverable: { type: 'boolean', description: 'Include unrecoverable associations in re-enable' },
-      body: { type: 'object', description: 'Request body (JSON object)' }
+      body: {
+        type: 'object',
+        description: 'Request body — fields depend on action. create_association / update_association_params: {params: object (driver-specific configuration parameters)}. execute_action: {params: object (action-specific input values)}',
+        properties: {
+          params: { type: 'object', description: 'Driver-specific configuration parameters or action input values' }
+        }
+      }
     },
     required: ['action']
   }
