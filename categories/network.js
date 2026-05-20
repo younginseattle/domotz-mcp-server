@@ -1,5 +1,11 @@
 export const tool = {
   name: 'domotz_network',
+  annotations: {
+    readOnlyHint: false,
+    destructiveHint: false,
+    idempotentHint: false,
+    openWorldHint: true
+  },
   description: `Manage network scan policies, interfaces, routed networks, and excluded devices. Use the "action" parameter to select an operation. Requires agent_id for all actions.
 
 ACTION REFERENCE:

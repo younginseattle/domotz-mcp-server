@@ -1,5 +1,11 @@
 export const tool = {
   name: 'domotz_agents',
+  annotations: {
+    readOnlyHint: false,
+    destructiveHint: true,
+    idempotentHint: false,
+    openWorldHint: true
+  },
   description: `Manage Domotz collectors (agents). Use the "action" parameter to select an operation. Requires agent_id for most actions.
 
 ACTION REFERENCE:

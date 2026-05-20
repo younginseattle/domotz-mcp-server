@@ -1,5 +1,11 @@
 export const tool = {
   name: 'domotz_monitoring',
+  annotations: {
+    readOnlyHint: false,
+    destructiveHint: true,
+    idempotentHint: false,
+    openWorldHint: true
+  },
   description: `Manage SNMP and TCP sensors (called "Eyes" in Domotz) on devices. Use the "action" parameter to select an operation. Requires agent_id and device_id for all actions.
 
 ACTION REFERENCE:

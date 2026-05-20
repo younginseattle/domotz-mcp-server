@@ -1,5 +1,11 @@
 export const tool = {
   name: 'domotz_account',
+  annotations: {
+    readOnlyHint: true,
+    destructiveHint: false,
+    idempotentHint: true,
+    openWorldHint: true
+  },
   description: `Account information, API usage, areas, and teams. Use the "action" parameter to select an operation.
 
 ACTION REFERENCE:

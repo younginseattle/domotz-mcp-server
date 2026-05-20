@@ -1,5 +1,11 @@
 export const tool = {
   name: 'domotz_configuration',
+  annotations: {
+    readOnlyHint: false,
+    destructiveHint: true,
+    idempotentHint: false,
+    openWorldHint: true
+  },
   description: `Manage device configuration backups, credentials, and SNMP authentication. Use the "action" parameter to select an operation. Requires agent_id and device_id for all actions.
 
 ACTION REFERENCE:

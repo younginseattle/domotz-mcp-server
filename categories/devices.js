@@ -1,5 +1,11 @@
 export const tool = {
   name: 'domotz_devices',
+  annotations: {
+    readOnlyHint: false,
+    destructiveHint: true,
+    idempotentHint: false,
+    openWorldHint: true
+  },
   description: `Manage devices on Domotz collectors. Use the "action" parameter to select an operation. Most actions require agent_id and device_id.
 
 ACTION REFERENCE:

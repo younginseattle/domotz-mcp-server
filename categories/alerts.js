@@ -1,5 +1,11 @@
 export const tool = {
   name: 'domotz_alerts',
+  annotations: {
+    readOnlyHint: false,
+    destructiveHint: true,
+    idempotentHint: false,
+    openWorldHint: true
+  },
   description: `Manage alert profiles and their bindings to collectors and devices. Use the "action" parameter to select an operation.
 
 ACTION REFERENCE:
