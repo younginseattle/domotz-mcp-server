@@ -55,7 +55,18 @@ EXAMPLES:
       inventory_field: { type: 'string', description: 'Inventory field name' },
       custom_tag_id: { type: 'integer', description: 'Custom Tag ID' },
       device_profile_id: { type: 'integer', description: 'Device Profile ID' },
-      body: { type: 'object', description: 'Request body (JSON object)' }
+      body: {
+        type: 'object',
+        description: 'Request body — fields depend on action. create_field / update_field: {label?: string, default_value?: string}. set_device_field: {value: string (required)}. create_tag: {label: string (required), color?: string}. edit_tag: {label?: string, color?: string}. apply_profile: {device_ids: integer[] (required)}',
+        properties: {
+          label: { type: 'string', description: 'Display label (create_field, update_field, create_tag, edit_tag)' },
+          default_value: { type: 'string', description: 'Default field value (create_field, update_field)' },
+          value: { type: 'string', description: 'Field value to set on the device (set_device_field)' },
+          color: { type: 'string', description: 'Tag color (create_tag, edit_tag)' },
+          device_ids: { type: 'array', items: { type: 'integer' }, description: 'List of device IDs to apply the profile to (apply_profile)' }
+        },
+        additionalProperties: true
+      }
     },
     required: ['action']
   }
