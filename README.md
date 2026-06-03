@@ -137,7 +137,7 @@ Log into the [Domotz Portal](https://portal.domotz.com) → **Account Settings**
 ### 2. Clone the repo
 
 ```bash
-git clone https://github.com/myoung76/domotz-mcp-server.git
+git clone https://github.com/younginseattle/domotz-mcp-server.git
 cd domotz-mcp-server
 npm install
 ```
@@ -237,7 +237,7 @@ This MCP server was built as part of the product work to bring agentic AI workfl
 
 The [Model Context Protocol](https://modelcontextprotocol.io) makes this composable — the same server works with any MCP-compatible client, not just Claude. As the MCP ecosystem matures, infrastructure platforms like Domotz become first-class participants in agentic workflows: not just data sources, but active participants that agents can query, configure, and act through.
 
-For a broader look at MCP architecture patterns, agent platform design, and related thinking: [github.com/myoung76/agent-platform-notes](https://github.com/myoung76/agent-platform-notes)
+For a broader look at MCP architecture patterns, agent platform design, and related thinking: [github.com/younginseattle/agent-platform-notes](https://github.com/younginseattle/agent-platform-notes)
 
 ---
 
